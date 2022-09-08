@@ -8,18 +8,6 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
 });
 
-const User = sequelize.define("user", {
-  username: DataTypes.STRING,
-  password: DataTypes.STRING,
-  name: DataTypes.STRING,
-  last_name: DataTypes.STRING,
-},{
-    tableName:"usuarios",
-    timestamps:false
-});
 
-User.removeAttribute("id");
 
-User.sync();
-
-export { User };
+export { sequelize };
