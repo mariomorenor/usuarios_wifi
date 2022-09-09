@@ -9,7 +9,7 @@ const port = process.env.APP_PORT;
 const cors = require("cors");
 
 app.use(cors());
-app.use(require("./routes"));
+app.use(require("./routes/routes"));
 
 app.listen(port, () => {
   console.log("Server Escuchando en puerto", port);

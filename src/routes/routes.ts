@@ -1,6 +1,6 @@
 import express from "express";
 
-import { sequelize } from "./db";
+import { sequelize } from "../db/db";
 
 const router = express.Router();
 
@@ -9,12 +9,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/getUser/:key", async (req, res) => {
+  
   let [user, metadata] = await sequelize.query(
-    `SELECT * 
-                              FROM radcheck 
-                              WHERE identity LIKE '${req.params.key}%'
-                              OR username LIKE '${req.params.key}%'
-                              LIMIT 20`
+    `SELECT * FROM radcheck WHERE identity LIKE '${req.params.key}%' OR username LIKE '${req.params.key}%'
+                              LIMIT 20;`
   );
 
   res.send(user);
