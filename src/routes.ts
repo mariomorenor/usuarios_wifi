@@ -8,16 +8,26 @@ router.get("/", (req, res) => {
   res.send("Server Online :3");
 });
 
-router.post("/getUser/:key", async (req, res) => {
+router.post("/getUser", async (req, res) => {
   let [user, metadata] = await sequelize.query(
     `SELECT * 
                               FROM radcheck 
-                              WHERE identity LIKE '${req.params.key}%'
-                              OR username LIKE '${req.params.key}%'
+                              WHERE identity LIKE '${req.body.identity}%'
+                              OR username LIKE '%${req.body.identity.toLowerCase()}%'
                               LIMIT 20`
   );
 
   res.send(user);
+});
+
+router.post("/updatePassword", async (req, res) => {
+  console.log(req.body);
+
+  let [result, metadata] = await sequelize.query(
+    `UPDATE radcheck SET value = '${req.body.user.value}' WHERE id = ${req.body.user.id}`
+  );
+  
+  res.send(metadata);
 });
 
 module.exports = router;
