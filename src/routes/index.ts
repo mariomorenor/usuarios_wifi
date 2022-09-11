@@ -1,6 +1,6 @@
 import express from "express";
 
-import { sequelize } from "../db/db";
+import { sequelize } from "../db";
 
 const router = express.Router();
 
