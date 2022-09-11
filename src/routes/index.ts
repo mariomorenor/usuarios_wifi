@@ -49,8 +49,21 @@ router.post("/createUser", async (req, res) => {
     res.send({ id: result });
   } catch (error) {
     console.log(error);
-    res.status(500).send(error,)
+    res.status(500).send(error);
   }
+});
+
+router.post("/deleteUser", async (req, res) => {
+  let [result, metadata] = await sequelize.query(
+    `DELETE FROM radcheck WHERE id = :user_id`,
+    {
+      replacements: {
+        user_id: req.body.user_id,
+      },
+    }
+  );
+
+  res.send(result);
 });
 
 module.exports = router;
