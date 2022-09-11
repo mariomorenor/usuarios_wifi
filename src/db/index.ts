@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize";
 
 const sequelize = new Sequelize({
-  dialect: "mysql",
+  dialect: "mariadb",
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   username: process.env.DB_USER,
