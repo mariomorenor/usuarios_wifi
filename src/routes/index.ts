@@ -14,6 +14,7 @@ router.post("/getUser", async (req, res) => {
                               FROM radcheck 
                               WHERE identity LIKE '${req.body.identity}%'
                               OR username LIKE '%${req.body.identity.toLowerCase()}%'
+                              OR email LIKE '${req.body.identity}%'
                               LIMIT 20`
   );
 
