@@ -21,9 +21,20 @@ router.post("/getUser", async (req, res) => {
   res.send(user);
 });
 
-router.post("/updatePassword", async (req, res) => {
+router.post("/updateUser", async (req, res) => {
+  console.log(req.body.user);
+  
   let [result, metadata] = await sequelize.query(
-    `UPDATE radcheck SET value = '${req.body.user.value}' WHERE id = ${req.body.user.id}`
+    `UPDATE radcheck
+     SET value = '${req.body.user.password}',
+         identity = '${req.body.user.identity}',
+         username = '${req.body.user.username}',
+         name = '${req.body.user.name}',
+         last_name = '${req.body.user.last_name}',
+         email = '${req.body.user.email}',` +
+      "`career-unit`" +
+      ` = '${req.body.user.career}'
+    WHERE id = ${req.body.user.id}`
   );
 
   res.send(metadata);
